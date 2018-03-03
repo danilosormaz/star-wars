@@ -1,0 +1,70 @@
+<div class="navbar">
+  <a id="logo" href="#"><i class="swg swg-r2d2 swg-2x"></i></a>
+  <input type="checkbox" id="toggle"><label id="checker" for="toggle"><i class="fa fa-bars fa-lg"></i></label>
+  <ul class="nav">
+    <li><a href="#">Početna</a></li>
+    <li><a href="#people">Osobe</a></li>
+    <li><a href="#planets">Planete</a></li>
+    <li><a href="#starships">Brodovi</a></li>
+  </ul>
+</div>
+
+
+
+<div class="container" (click)="f2($event)">
+
+  <h1 class="header">
+    THIS IS GIDEON TEST API EXAMPLE SOLUTION FOR DANILO SORMAZ
+  </h1>
+
+  <div *ngFor="let key of objectKeys(info)">
+    <br>
+    <h3 *ngIf="key =='people'" class="section-header" id="people">Osobe <span class="number-of">Ukupno:{{countEntity[key]}}</span>
+    </h3>
+    <h3 *ngIf="key =='planets'" class="section-header" id="planets">Planete <span class="number-of">Ukupno:{{countEntity[key]}}</span></h3>
+    <h3 *ngIf="key =='starships'" class="section-header" id="starships">Brodovi <span class="number-of">Ukupno:{{countEntity[key]}}</span></h3>
+
+    <div class="flex-container">
+      <div class="flex-item" *ngFor="let element of info[key] ;let i = index;">
+        <div *ngIf="i<NUM_OF_CARDS" (click)="toggleCard(element,i,key)" [ngClass]="{'is-opened':element.isOpen=='true'}" >
+          <i class="fa fa-4x " [ngClass]="{' fa-rebel ':key=='people',' fa-globe ':key=='planets',' fa-first-order ':key=='starships'}" ></i>
+        </div>
+
+        <table *ngIf="i<NUM_OF_CARDS" [ngStyle]="{display:element.isOpen=='true'? 'table':'none'}" class="t01">
+          <tbody>
+            <tr *ngFor="let elementKey of objectKeys(element)">
+              <ng-template [ngIf]="elementKey!='url' && elementKey!='created' && elementKey!='edited' &&  elementKey!='isOpen'">
+                <td>{{capitalizeFirstLetter(elementKey)}}</td>
+                <ng-container [ngSwitch]="element[elementKey]">
+                  <td *ngSwitchCase="''">-</td>
+                  <td *ngSwitchDefault>
+                    <ng-container *ngIf="!urlChecker(element[elementKey]) && !checkIsArr(element[elementKey])">
+                      {{element[elementKey]}}
+                    </ng-container>
+                    <ng-container *ngIf="urlChecker(element[elementKey]) ">
+                      <i class="fa fa-circle-o-notch fa-spin fa-lg fa-fw"></i> </ng-container>
+                    <ng-container class="url-paragraph" *ngIf=" !urlChecker(element[elementKey]) &&checkIsArr(element[elementKey])">
+                      <p class="url-paragraph" *ngFor="let elementUrl of element[elementKey]">
+                        {{elementUrl}}
+                      </p>
+                    </ng-container>
+                  </td>
+                </ng-container>
+              </ng-template>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container footer">
+    <p><strong>Posted by:</strong> (Jedi) Danilo Sormaz</p>
+    <p><strong>Contact information:</strong>
+      <a href="mailto:danilosormaz@gmail.com">
+                danilosormaz@gmail.com
+    </a>
+    </p>
+  </div>

@@ -1,0 +1,23 @@
+ html {
+    height:100%;
+}
+
+body{
+    margin:0;
+    padding:0;
+    position:relative;
+    padding-bottom:6rem;
+    background-image:url('assets/images/planets.jpg');
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-size:cover; 
+    min-height:100%;
+}
+
+* {
+    box-sizing:border-box;
+}
+ 
+
+
+
